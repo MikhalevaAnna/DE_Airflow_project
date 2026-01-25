@@ -269,10 +269,11 @@ c) Используйте комментарии для разделения л�
 Порядок соответствует порядку в исходном файле.</br>
 
 ### Запуск генератора
-
-#### В контейнере Airflow
+1) `git clone git@github.com:MikhalevaAnna/DE_Airflow_project.git`
+2) `cd DE_Airflow_project`
+3) `docker-compose up -d`
+4) Запускаем генератор в контейнере Airflow
 `docker exec -it airflow-scheduler python /opt/airflow/generators/dag_generator.py`
-
 #### Или напрямую
 ```
 cd /opt/airflow/generators
