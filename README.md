@@ -272,14 +272,11 @@ c) Используйте комментарии для разделения л�
 1) `git clone git@github.com:MikhalevaAnna/DE_Airflow_project.git`
 2) `cd DE_Airflow_project`
 3) `docker-compose up -d`
-4) Создаем подключение в **Airflow**, по умолчанию используется подключение с именем `postgres_default`
-5) Запускаем генератор в контейнере Airflow
-`docker exec -it airflow-scheduler python /opt/airflow/generators/dag_generator.py`
-#### Или напрямую
-```
-cd /opt/airflow/generators
-python dag_generator.py
-```
+4) Создаем подключение в **Airflow**, по умолчанию используется подключение с именем `postgres_default`.
+5) Все настройки подключения прописаны в файле `docker-compose.yml`.
+6) Запускаем генератор в контейнере Airflow
+`docker exec -it airflow-scheduler python /opt/airflow/generators/dag_generator.py`.
+
 
 ### Примеры использования 
 1. Примеры **Python** и **SQl** скриптов, для которых нужно сформировать **Airflow DAG** находятся в папке `scripts`.
