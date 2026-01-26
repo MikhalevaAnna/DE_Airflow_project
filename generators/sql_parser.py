@@ -161,7 +161,7 @@ class SQLParser:
         return f"{base_task_id}_{command_counter[base_task_id]}"
 
     def _parse_sql_statements_improved(self, content: str) -> List[str]:
-        """Улучшенный парсер SQL команд для многострочных выражений"""
+        """Парсер SQL команд для многострочных выражений"""
         statements = []
         current = []
         in_string = False
@@ -231,8 +231,6 @@ class SQLParser:
         """Определяет тип SQL команды"""
         sql_upper = sql[:100].upper()
 
-        # ВАЖНО: Проверяем в правильном порядке!
-        # Сначала CREATE INDEX, потом CREATE TABLE
         if 'CREATE INDEX' in sql_upper:
             return 'CREATE INDEX'
         elif 'DROP INDEX' in sql_upper:

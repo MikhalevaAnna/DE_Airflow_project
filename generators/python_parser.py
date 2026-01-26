@@ -52,7 +52,6 @@ class PythonParser:
 
         try:
             tree = ast.parse(content)
-
             # Собираем все импорты
             for node in ast.walk(tree):
                 if isinstance(node, ast.Import):

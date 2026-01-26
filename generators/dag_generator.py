@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """
 Генератор DAG из файлов в папке scripts
-Каждый SQL запрос или Python функция - отдельная задача
-Полная встраиваемость кода без внешних зависимостей
+Каждый SQL запрос - отдельная задача
+Для Python функции - если функции независимые, то отдельные задачи
+Для зависимых Python функций - одна задача
 """
 
 import re
@@ -215,7 +216,7 @@ class MultiTaskDAGGenerator:
         return self.python_parser._adapt_function_for_airflow(func_body, func_name, has_kwargs)
 
     def generate_dag(self, file_path: Path, parsed_data: Dict):
-        """Генерация DAG файла где каждая функция - отдельная задача"""
+        """Генерация DAG файла"""
         try:
             dag_name = f"generated_{file_path.stem}"
             dag_id = re.sub(r'[^a-zA-Z0-9_]', '_', dag_name)
@@ -329,8 +330,6 @@ class MultiTaskDAGGenerator:
 
             # Для Python файлов - встраиваем весь код
             if is_python and functions_info:
-                dag_code.append('# === ВСТРОЕННЫЕ ФУНКЦИИ ИЗ ИСХОДНОГО ФАЙЛА ===')
-                dag_code.append('')
 
                 sorted_functions = [f['name'] for f in functions_info]
 
